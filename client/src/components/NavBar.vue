@@ -45,4 +45,8 @@
   background-color: #f8f9fa !important;
   z-index: 1000;
 }
+
+li {
+  padding: 0 25px;
+}
 </style>

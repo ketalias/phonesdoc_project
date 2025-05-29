@@ -5,7 +5,12 @@
       <div v-for="phone in phones" :key="phone.fullname" class="col">
         <phone-card :phone="phone">
           <template #actions>
-            <button class="btn btn-dark btn-sm w-100 p-3">Перейти</button>
+            <router-link
+              :to="{ name: 'phoneinfo', params: { id: phone.id } }"
+              class="btn btn-dark btn-sm w-100 p-3"
+            >
+              Перейти
+            </router-link>
           </template>
         </phone-card>
       </div>

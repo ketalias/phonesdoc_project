@@ -1,5 +1,5 @@
 <template>
-  <div class="main-wrap mt-5">
+  <div class="main-wrap">
     <section
       class="hero-section bg-dark text-white d-flex align-items-center position-relative"
     >

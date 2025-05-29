@@ -23,13 +23,13 @@
             <router-link class="nav-link fw-bold" to="/">Головна</router-link>
           </li>
           <li class="nav-item">
-            <router-link class="nav-link fw-bold" to="/about"
-              >Про нас</router-link
+            <router-link class="nav-link fw-bold" to="/catalog"
+              >Каталог</router-link
             >
           </li>
           <li class="nav-item">
             <router-link class="nav-link fw-bold" to="/contact"
-              >Контакти</router-link
+              >Про нас</router-link
             >
           </li>
         </ul>

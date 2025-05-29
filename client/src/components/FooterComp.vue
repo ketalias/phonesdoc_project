@@ -52,6 +52,12 @@
 
 <style lang="scss" scoped>
 .wrapper {
+  // position: fixed;
+  // bottom: 0;
+  // width: 100%;
+  // background-color: #121212;
+  // color: #fff;
+
   .container {
     .row {
       .col-md-4 {
@@ -66,7 +72,7 @@
             left: 0;
             width: 50px;
             height: 2px;
-            background: #72077b;
+            background: #d5d4d5;
             transition: width 0.3s ease;
           }
 

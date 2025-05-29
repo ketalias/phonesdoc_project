@@ -1,5 +1,5 @@
 <template>
-  <div class="wrapper bg-dark text-white mt-5">
+  <div class="wrapper-footer bg-dark text-white mt-5">
     <div class="container py-5">
       <div class="row">
         <div class="col-md-4 mb-4 mb-md-0">
@@ -51,12 +51,13 @@
 </template>
 
 <style lang="scss" scoped>
-.wrapper {
-  // position: fixed;
-  // bottom: 0;
-  // width: 100%;
-  // background-color: #121212;
-  // color: #fff;
+.wrapper-footer {
+  position: static;
+  bottom: 0;
+  width: 100%;
+  background-color: #121212;
+  color: #fff;
+  height: auto;
 
   .container {
     .row {

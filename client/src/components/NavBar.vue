@@ -27,11 +27,6 @@
               >Каталог</router-link
             >
           </li>
-          <li class="nav-item">
-            <router-link class="nav-link fw-bold" to="/contact"
-              >Про нас</router-link
-            >
-          </li>
         </ul>
       </div>
     </div>

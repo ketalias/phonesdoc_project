@@ -106,33 +106,6 @@
         </div>
       </div>
     </section>
-    <section class="phones-section py-5 bg-white text-dark">
-      <div class="container">
-        <div class="row">
-          <div class="col-4 text-right">
-            <h2 class="h1 mb-4 fw-bold">Каталог</h2>
-          </div>
-          <div class="row g-3">
-            <div
-              v-for="phone in phones"
-              :key="phone.id"
-              class="col-12 col-md-6 col-lg-4"
-            >
-              <PhoneCard :phone="phone">
-                <template #actions>
-                  <button
-                    class="btn btn-outline-danger btn-sm"
-                    @click="remove(phone.id)"
-                  >
-                    Видалити
-                  </button>
-                </template>
-              </PhoneCard>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
     <section
       class="bg-dark text-white py-5 mt-5"
       style="
@@ -188,12 +161,10 @@
 </template>
 
 <script>
-import PhoneCard from "@/components/PhoneCard.vue";
 import FooterComp from "@/components/FooterComp.vue";
 export default {
   name: "HomeView",
   components: {
-    PhoneCard,
     FooterComp,
   },
   data() {

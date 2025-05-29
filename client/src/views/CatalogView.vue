@@ -1,72 +1,73 @@
 <template>
-  <div class="mt-3">
-    <div class="catalog-view row justify-content-center">
-      <div class="filter col-md-3">
-        <input
-          type="text"
-          class="form-control mb-3"
-          placeholder="Пошук..."
-          v-model="searchText"
-          @input="submitFilters"
-        />
-        <filter-dropdown
-          title="Бренд"
-          :options="brandOptions"
-          v-model:selected="selectedBrands"
-          filter-key="brand"
-          @change="submitFilters"
-        />
-        <filter-dropdown
-          title="Ціна"
-          :options="priceRanges"
-          v-model:selected="selectedPriceRanges"
-          filter-key="price"
-          :show-search="false"
-          @change="submitFilters"
-          class="mt-2"
-        />
-        <filter-dropdown
-          title="Рік"
-          :options="yearRanges"
-          v-model:selected="selectedYearRanges"
-          filter-key="year"
-          :show-search="false"
-          @change="submitFilters"
-          class="mt-2"
-        />
-        <filter-dropdown
-          title="Колір"
-          :options="colorRanges"
-          v-model:selected="selectedColorRanges"
-          filter-key="color"
-          :show-search="false"
-          @change="submitFilters"
-          class="mt-2"
-        />
-        <filter-dropdown
-          title="ІЧ порт"
-          :options="portRanges"
-          v-model:selected="selectedPortRanges"
-          filter-key="port"
-          :show-search="false"
-          @change="submitFilters"
-          class="mt-2"
-        />
-        <filter-dropdown
-          title="Блютуз"
-          :options="bluetoothRanges"
-          v-model:selected="selectedBluetoothRanges"
-          filter-key="bluetooth"
-          :show-search="false"
-          @change="submitFilters"
-          class="mt-2"
-        />
+  <div>
+    <div class="mt-3 wrapper">
+      <div class="catalog-view row justify-content-center">
+        <div class="filter col-md-3">
+          <input
+            type="text"
+            class="form-control mb-3"
+            placeholder="Пошук..."
+            v-model="searchText"
+            @input="submitFilters"
+          />
+          <filter-dropdown
+            title="Бренд"
+            :options="brandOptions"
+            v-model:selected="selectedBrands"
+            filter-key="brand"
+            @change="submitFilters"
+          />
+          <filter-dropdown
+            title="Ціна"
+            :options="priceRanges"
+            v-model:selected="selectedPriceRanges"
+            filter-key="price"
+            :show-search="false"
+            @change="submitFilters"
+            class="mt-2"
+          />
+          <filter-dropdown
+            title="Рік"
+            :options="yearRanges"
+            v-model:selected="selectedYearRanges"
+            filter-key="year"
+            :show-search="false"
+            @change="submitFilters"
+            class="mt-2"
+          />
+          <filter-dropdown
+            title="Колір"
+            :options="colorRanges"
+            v-model:selected="selectedColorRanges"
+            filter-key="color"
+            :show-search="false"
+            @change="submitFilters"
+            class="mt-2"
+          />
+          <filter-dropdown
+            title="ІЧ порт"
+            :options="portRanges"
+            v-model:selected="selectedPortRanges"
+            filter-key="port"
+            :show-search="false"
+            @change="submitFilters"
+            class="mt-2"
+          />
+          <filter-dropdown
+            title="Блютуз"
+            :options="bluetoothRanges"
+            v-model:selected="selectedBluetoothRanges"
+            filter-key="bluetooth"
+            :show-search="false"
+            @change="submitFilters"
+            class="mt-2"
+          />
+        </div>
+
+        <phones-grid :phones="filteredPhones" />
       </div>
-
-      <phones-grid :phones="filteredPhones" />
     </div>
-
-    <footer class="footer"><footer-comp /></footer>
+    <footer><footer-comp /></footer>
   </div>
 </template>
 
@@ -211,19 +212,16 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 * {
   box-sizing: border-box;
 }
 
-.footer {
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  background-color: #f8f9fa;
-  padding: 0.5rem 0;
-  text-align: center;
-  border-top: 1px solid #ced4da;
+.wrapper {
+  min-height: 60vh;
+}
+.catalog-view {
+  padding: 1rem;
 }
 
 .mt-3 {

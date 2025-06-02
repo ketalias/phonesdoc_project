@@ -17,6 +17,11 @@ const routes = [
     name: "phoneinfo",
     component: () => import("../views/PhoneInfoView.vue"),
   },
+  {
+    path: "/login",
+    name: "login",
+    component: () => import("../views/LoginView.vue"),
+  },
 ];
 
 const router = createRouter({

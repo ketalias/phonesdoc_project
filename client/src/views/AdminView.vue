@@ -15,7 +15,6 @@
       </template>
     </b-table>
 
-    <!-- Bootstrap 5 Modal -->
     <div
       class="modal fade"
       id="phoneModal"
@@ -49,8 +48,8 @@
                   required
                 />
               </b-form-group>
-              <b-form-group label="Color">
-                <b-form-input v-model="form.color" required />
+              <b-form-group label="Colors">
+                <b-form-input v-model="form.colors" />
               </b-form-group>
               <b-form-group label="Bluetooth">
                 <b-form-checkbox v-model="form.has_bluetooth" />
@@ -61,8 +60,38 @@
               <b-form-group label="Price">
                 <b-form-input type="number" v-model="form.price" required />
               </b-form-group>
+              <b-form-group label="Old Price">
+                <b-form-input type="number" v-model="form.old_price" />
+              </b-form-group>
               <b-form-group label="Photo URL">
                 <b-form-input v-model="form.photo_url" />
+              </b-form-group>
+              <b-form-group label="Memory Size">
+                <b-form-input v-model="form.memory_size" />
+              </b-form-group>
+              <b-form-group label="Screen Size">
+                <b-form-input v-model="form.screen_size" />
+              </b-form-group>
+              <b-form-group label="CPU">
+                <b-form-input v-model="form.cpu" />
+              </b-form-group>
+              <b-form-group label="Battery Capacity">
+                <b-form-input v-model="form.battery_capacity" />
+              </b-form-group>
+              <b-form-group label="Description">
+                <b-form-textarea v-model="form.description" rows="3" />
+              </b-form-group>
+              <b-form-group label="Refresh Rate">
+                <b-form-input v-model="form.refresh_rate" />
+              </b-form-group>
+              <b-form-group label="Resolution">
+                <b-form-input v-model="form.resolution" />
+              </b-form-group>
+              <b-form-group label="Screen Type">
+                <b-form-input v-model="form.screen_type" />
+              </b-form-group>
+              <b-form-group label="Number of Cores">
+                <b-form-input type="number" v-model="form.number_of_cores" />
               </b-form-group>
               <div class="modal-footer">
                 <b-button type="submit" variant="primary">Save</b-button>
@@ -95,17 +124,27 @@ export default {
       ],
       modalTitle: "Add Phone",
       modalVisible: false,
-      modalInstance: null, // Bootstrap Modal instance
+      modalInstance: null,
       editId: null,
       form: {
         fullname: "",
         brand: "",
         release_year: null,
-        color: "",
+        colors: "",
         has_bluetooth: false,
         has_infrared: false,
         price: null,
+        old_price: null,
         photo_url: "",
+        memory_size: "",
+        screen_size: "",
+        cpu: "",
+        battery_capacity: "",
+        description: "",
+        refresh_rate: "",
+        resolution: "",
+        screen_type: "",
+        number_of_cores: null,
       },
     };
   },
@@ -164,11 +203,21 @@ export default {
         fullname: "",
         brand: "",
         release_year: null,
-        color: "",
+        colors: "",
         has_bluetooth: false,
         has_infrared: false,
         price: null,
+        old_price: null,
         photo_url: "",
+        memory_size: "",
+        screen_size: "",
+        cpu: "",
+        battery_capacity: "",
+        description: "",
+        refresh_rate: "",
+        resolution: "",
+        screen_type: "",
+        number_of_cores: null,
       };
     },
     showModal() {
@@ -188,11 +237,9 @@ export default {
   },
   mounted() {
     this.loadPhones();
-    // Initialize modal instance
     this.modalInstance = new Modal(document.getElementById("phoneModal"));
   },
   beforeUnmount() {
-    // Clean up modal instance
     if (this.modalInstance) {
       this.modalInstance.dispose();
       this.modalInstance = null;

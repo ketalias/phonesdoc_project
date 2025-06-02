@@ -1,5 +1,5 @@
 <template>
-  <div class="items col-12 col-md-9 col-lg-9">
+  <div class="items col-12">
     <div v-if="phones.length === 0" class="text-muted">Нічого не знайдено</div>
 
     <div class="row g-4">

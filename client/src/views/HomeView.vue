@@ -50,30 +50,6 @@
               </div>
             </div>
           </div>
-          <div class="col-lg-12">
-            <div
-              class="product-card bg-secondary text-white p-4 h-100 d-flex flex-column flex-md-row align-items-center"
-            >
-              <img
-                src="https://images.samsung.com/is/image/samsung/p6pim/ua/sm-a065flbgsek/gallery/ua-galaxy-a06-sm-a065-sm-a065flbgsek-544200934?$684_547_PNG$"
-                alt="Samsung Phone"
-                class="img-fluid product-img mb-3 mb-md-0 me-md-4 col-6"
-                style="width: 25vw; height: auto"
-              />
-              <div class="product-info">
-                <h2 class="h3">Custom</h2>
-                <p class="text">
-                  У вашому особистому кабінеті реалізована можливість додавати,
-                  редагувати та видаляти позиції в базі даних усіх смартфонів
-                  від Apple. Ви можете легко створювати нові записи з
-                  інформацією про моделі, змінювати існуючі дані, такі як
-                  технічні характеристики чи дати випуску, а також видаляти
-                  застарілі або непотрібні позиції, забезпечуючи гнучке
-                  керування базою.
-                </p>
-              </div>
-            </div>
-          </div>
         </div>
 
         <div class="row">
@@ -94,7 +70,7 @@
           </div>
           <div class="col-md-6 mb-4 mb-md-0">
             <div
-              class="product-card bg-dark text-white p-4 h-100 d-flex flex-column flex-md-row align-items-center"
+              class="product-card bg-secondary text-white p-4 h-100 d-flex flex-column flex-md-row align-items-center"
             >
               <img
                 src="https://applehome.te.ua/wp-content/uploads/2021/01/airpods-max-select-spacegray-202011.png"

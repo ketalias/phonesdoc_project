@@ -5,13 +5,94 @@ exports.getPhones = async (req, res) => {
   const page = parseInt(req.query.page) || 1;
   const offset = (page - 1) * limit;
 
+  const { search, brands, prices, years, colors, ports, bluetooth } = req.query;
+
+  const values = [];
+  const conditions = [];
+
+  if (search) {
+    values.push(`%${search.toLowerCase()}%`);
+    conditions.push(`LOWER(fullname) LIKE $${values.length}`);
+  }
+
+  if (brands) {
+    const brandList = brands.split(",");
+    const placeholders = brandList.map((_, i) => `$${values.length + i + 1}`);
+    values.push(...brandList);
+    conditions.push(`brand IN (${placeholders.join(",")})`);
+  }
+
+  if (prices) {
+    const priceConditions = prices.split(",").map((range) => {
+      const [min, max] = range.split("-").map(Number);
+      if (!isNaN(min) && isFinite(max)) {
+        values.push(min, max);
+        return `(price >= $${values.length - 1} AND price <= $${
+          values.length
+        })`;
+      } else {
+        values.push(min);
+        return `(price >= $${values.length})`;
+      }
+    });
+    conditions.push(`(${priceConditions.join(" OR ")})`);
+  }
+
+  if (years) {
+    const yearConditions = years.split(",").map((range) => {
+      const [min, max] = range.split("-").map(Number);
+      if (!isNaN(min) && isFinite(max)) {
+        values.push(min, max);
+        return `(release_year >= $${values.length - 1} AND release_year <= $${
+          values.length
+        })`;
+      } else {
+        values.push(min);
+        return `(release_year >= $${values.length})`;
+      }
+    });
+    conditions.push(`(${yearConditions.join(" OR ")})`);
+  }
+
+  if (colors) {
+    const colorList = colors.split(",");
+    const placeholders = colorList.map((_, i) => `$${values.length + i + 1}`);
+    values.push(...colorList);
+    conditions.push(`EXISTS (
+      SELECT 1 FROM unnest(colors) AS c WHERE c IN (${placeholders.join(",")})
+    )`);
+  }
+
+  if (ports) {
+    const portValues = ports.split(",").map((v) => v === "true");
+    const placeholders = portValues.map((_, i) => `$${values.length + i + 1}`);
+    values.push(...portValues);
+    conditions.push(`has_infrared IN (${placeholders.join(",")})`);
+  }
+
+  if (bluetooth) {
+    const btValues = bluetooth.split(",").map((v) => v === "true");
+    const placeholders = btValues.map((_, i) => `$${values.length + i + 1}`);
+    values.push(...btValues);
+    conditions.push(`has_bluetooth IN (${placeholders.join(",")})`);
+  }
+
+  const whereClause =
+    conditions.length > 0 ? `WHERE ${conditions.join(" AND ")}` : "";
+
   try {
     const phonesResult = await pool.query(
-      `SELECT * FROM phones ORDER BY id LIMIT $1 OFFSET $2`,
-      [limit, offset]
+      `SELECT * FROM phones ${whereClause} ORDER BY id LIMIT $${
+        values.length + 1
+      } OFFSET $${values.length + 2}`,
+      [...values, limit, offset]
     );
 
-    const countResult = await pool.query(`SELECT COUNT(*) FROM phones`);
+    const countResult = await pool.query(
+      `SELECT COUNT(*) FROM phones ${whereClause}`,
+      values
+    );
+
     const total = parseInt(countResult.rows[0].count);
 
     res.json({
@@ -42,25 +123,51 @@ exports.createPhone = async (req, res) => {
     fullname,
     brand,
     release_year,
-    color,
+    colors,
     has_bluetooth,
     has_infrared,
     price,
+    old_price,
     photo_url,
+    memory_size,
+    screen_size,
+    cpu,
+    battery_capacity,
+    description,
+    refresh_rate,
+    resolution,
+    screen_type,
+    number_of_cores,
   } = req.body;
+
   try {
     const result = await pool.query(
-      `INSERT INTO phones (fullname, brand, release_year, color, has_bluetooth, has_infrared, price, photo_url)
-       VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *`,
+      `INSERT INTO phones 
+        (fullname, brand, release_year, colors, has_bluetooth, has_infrared, price, old_price, photo_url,
+         memory_size, screen_size, cpu, battery_capacity, description, refresh_rate, resolution, screen_type, number_of_cores)
+       VALUES 
+        ($1, $2, $3, $4, $5, $6, $7, $8, $9,
+         $10, $11, $12, $13, $14, $15, $16, $17, $18)
+       RETURNING *`,
       [
         fullname,
         brand,
         release_year,
-        color,
+        colors,
         has_bluetooth,
         has_infrared,
         price,
+        old_price,
         photo_url,
+        memory_size,
+        screen_size,
+        cpu,
+        battery_capacity,
+        description,
+        refresh_rate,
+        resolution,
+        screen_type,
+        number_of_cores,
       ]
     );
     res.status(201).json(result.rows[0]);
@@ -75,30 +182,57 @@ exports.updatePhone = async (req, res) => {
     fullname,
     brand,
     release_year,
-    color,
+    colors,
     has_bluetooth,
     has_infrared,
     price,
+    old_price,
     photo_url,
+    memory_size,
+    screen_size,
+    cpu,
+    battery_capacity,
+    description,
+    refresh_rate,
+    resolution,
+    screen_type,
+    number_of_cores,
   } = req.body;
+
   try {
     const result = await pool.query(
-      `UPDATE phones SET fullname=$1, brand=$2, release_year=$3, color=$4,
-       has_bluetooth=$5, has_infrared=$6, price=$7, photo_url=$8 WHERE id=$9 RETURNING *`,
+      `UPDATE phones SET 
+        fullname=$1, brand=$2, release_year=$3, colors=$4, has_bluetooth=$5,
+        has_infrared=$6, price=$7, old_price=$8, photo_url=$9,
+        memory_size=$10, screen_size=$11, cpu=$12, battery_capacity=$13, description=$14,
+        refresh_rate=$15, resolution=$16, screen_type=$17, number_of_cores=$18
+       WHERE id=$19 RETURNING *`,
       [
         fullname,
         brand,
         release_year,
-        color,
+        colors,
         has_bluetooth,
         has_infrared,
         price,
+        old_price,
         photo_url,
+        memory_size,
+        screen_size,
+        cpu,
+        battery_capacity,
+        description,
+        refresh_rate,
+        resolution,
+        screen_type,
+        number_of_cores,
         id,
       ]
     );
+
     if (result.rows.length === 0)
       return res.status(404).json({ message: "Not found" });
+
     res.json(result.rows[0]);
   } catch (err) {
     res.status(500).json({ error: err.message });

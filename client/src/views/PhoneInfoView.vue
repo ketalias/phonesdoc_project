@@ -70,8 +70,4 @@ export default {
 };
 </script>
 
-<style>
-* {
-  /* border: 1px solid black; */
-}
-</style>
+<style></style>

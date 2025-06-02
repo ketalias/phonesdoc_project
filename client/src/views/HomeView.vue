@@ -11,10 +11,10 @@
               <span class="fw-light">Phone Catalog</span> Number One
             </h1>
             <p class="lead mb-4 text-wrap">
-              PhoneDoc is a web application that provides a comprehensive
-              catalog of mobile phones.
+              PhoneDoc це веб додаток для керування телефонним бізнесом за
+              допомогою довідника, швидко та зручно.
             </p>
-            <button class="btn btn-outline-light btn-lg">Get Started</button>
+            <button class="btn btn-outline-light btn-lg">Почати</button>
           </div>
           <div class="image-container col-md-6 position-relative">
             <img
@@ -42,8 +42,10 @@
               <div class="product-info">
                 <h2 class="h3">Apple</h2>
                 <p class="text">
-                  Неймовірно потужний процесор, графіка та SSD з інтегрованим
-                  I/O перевизначать твій досвід із PlayStation.
+                  Готова база даних, що містить детальну інформацію про всі
+                  смартфони, випущені компанією Apple. Ця база охоплює технічні
+                  характеристики, дати випуску, особливості моделей, а також їх
+                  еволюцію від першого iPhone до найновіших пристроїв.
                 </p>
               </div>
             </div>
@@ -59,10 +61,15 @@
                 style="width: 25vw; height: auto"
               />
               <div class="product-info">
-                <h2 class="h3">Samsung</h2>
+                <h2 class="h3">Custom</h2>
                 <p class="text">
-                  Новий 15-дюймовий MacBook Air має більше місця для дисплея
-                  Liquid Retina.
+                  У вашому особистому кабінеті реалізована можливість додавати,
+                  редагувати та видаляти позиції в базі даних усіх смартфонів
+                  від Apple. Ви можете легко створювати нові записи з
+                  інформацією про моделі, змінювати існуючі дані, такі як
+                  технічні характеристики чи дати випуску, а також видаляти
+                  застарілі або непотрібні позиції, забезпечуючи гнучке
+                  керування базою.
                 </p>
               </div>
             </div>
@@ -80,8 +87,8 @@
                 class="img-fluid col-6 product-img mb-3 mb-md-0 me-md-4"
               />
               <div class="product-info">
-                <h3 class="h4">AppleWatch</h3>
-                <p>Скоро у продажу!</p>
+                <h3 class="h4">Електронні годинники</h3>
+                <p>Скоро у мережі!</p>
               </div>
             </div>
           </div>
@@ -95,8 +102,8 @@
                 class="img-fluid product-img mb-3 mb-md-0 me-md-4"
               />
               <div class="product-info">
-                <h3 class="h4">AirPods Max</h3>
-                <p>Вже у продажу</p>
+                <h3 class="h4">Навушники</h3>
+                <p>Скоро стане доступним для додавання!</p>
               </div>
             </div>
           </div>
@@ -115,7 +122,6 @@
       <div
         class="d-flex flex-column flex-md-row align-items-center justify-content-between text-center"
       >
-        <!-- Left Image -->
         <div
           class="col-md-3 mb-4 mb-md-0 d-none d-md-flex justify-content-center"
         >
@@ -126,8 +132,6 @@
             alt="Phone Left"
           />
         </div>
-
-        <!-- Center Text -->
         <div class="col-md-6 mb-4 mb-md-0">
           <h1 class="display-2 mb-3">Керуйте бізнесом разом з нами</h1>
           <p class="lead mb-4">
@@ -135,11 +139,9 @@
             кращої продуктивності
           </p>
           <button class="btn btn-outline-light btn-lg">
-            Перейти в каталог
+            Перейти в каталог!
           </button>
         </div>
-
-        <!-- Right Image -->
         <div class="col-md-3 d-flex justify-content-center">
           <img
             class="img-fluid"

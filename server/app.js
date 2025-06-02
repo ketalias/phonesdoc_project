@@ -3,6 +3,7 @@ const cors = require("cors");
 const express = require("express");
 const app = express();
 const phoneRoutes = require("./routes/phoneRoutes");
+const usersRoutes = require("./routes/usersRoutes");
 
 app.use(cors({
   origin: 'http://localhost:8080'
@@ -10,5 +11,6 @@ app.use(cors({
 
 app.use(express.json());
 app.use("/api/phones", phoneRoutes);
+app.use("/api/users", usersRoutes);
 
 module.exports = app;

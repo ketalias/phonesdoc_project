@@ -27,11 +27,6 @@
               >Каталог</router-link
             >
           </li>
-          <li>
-            <router-link class="nav-link fw-bold" to="/login"
-              >Авторизуватись</router-link
-            >
-          </li>
         </ul>
       </div>
     </div>

@@ -8,9 +8,12 @@
     <div class="card-body d-flex flex-column">
       <h5 class="card-title mb-2">{{ phone.fullname }}</h5>
       <p><strong>Ціна:</strong> ${{ phone.price }}</p>
-      <div class="mt-auto">
-        <slot name="actions" />
-      </div>
+      <router-link
+        :to="{ name: 'phoneinfo', params: { id: phone.id } }"
+        class="btn btn-dark btn-sm w-100 p-3"
+      >
+        Перейти
+      </router-link>
     </div>
   </div>
 </template>
@@ -30,6 +33,9 @@ export default {
 <style scoped>
 * {
   background-color: white !important;
+}
+.btn {
+  background-color: #252424 !important;
 }
 .card-img-top {
   object-fit: contain;

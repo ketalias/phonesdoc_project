@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="bg-light">
     <nav-bar />
     <router-view />
   </div>

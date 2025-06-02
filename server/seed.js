@@ -8,44 +8,66 @@ const pool = new Pool({
   port: 5432,
 });
 
-const phones = [
-  {
-    fullname: "Samsung Galaxy S23 Ultra",
-    brand: "Samsung",
-    release_year: 2021,
-    color: "Black",
-    has_bluetooth: true,
-    has_infrared: false,
-    price: 799.99,
-    photo_url:
-      "https://mobileplanet.ua/uploads/product/2023-2-3/xmagazin-mobileplanet-samsung-galaxy-s23-ultra-12-256gb-phanto-2653971.jpg.pagespeed.ic.NrxQQ8hd8y.jpg",
-  },
-  {
-    fullname: "iPhone 15 Pro Max",
-    brand: "Apple",
-    release_year: 2021,
-    color: "White",
-    has_bluetooth: true,
-    has_infrared: false,
-    price: 999.99,
-    photo_url:
-      "https://www.imagineonline.store/cdn/shop/files/iPhone_15_Green_PDP_Image_Position-1__en-IN_a957365d-0aa2-43da-88b1-fcaa9b0be4cf.jpg?v=1694606789&width=823",
-  },
-  {
-    fullname: "Xiaomi Mi 11",
-    brand: "Xiaomi",
-    release_year: 2020,
-    color: "Blue",
-    has_bluetooth: true,
-    has_infrared: true,
-    price: 699.99,
-    photo_url:
-      "https://cdn.new-brz.net/app/public/models/REDMINOTE11-6128GGR/large/w/220822160017224759.webp",
-  },
+const brands = ["Samsung", "Apple", "Xiaomi", "OnePlus", "Motorola", "Nokia"];
+const colors = [
+  "Black",
+  "White",
+  "Blue",
+  "Green",
+  "Red",
+  "Silver",
+  "Gold",
+  "Gray",
 ];
+const years = [2019, 2020, 2021, 2022, 2023, 2024];
+
+const brandImages = {
+  Samsung:
+    "https://scdn.comfy.ua/89fc351a-22e7-41ee-8321-f8a9356ca351/https://cdn.comfy.ua/media/catalog/product/s/m/sm-s931_galaxys25_front_navy_241108.jpg/w_600",
+  Apple:
+    "https://scdn.comfy.ua/89fc351a-22e7-41ee-8321-f8a9356ca351/https://cdn.comfy.ua/media/catalog/product/i/p/iphone_16_pro_max_desert_titanium_pdp_image_position_1__ce-ww.jpg/w_600",
+  Xiaomi:
+    "https://scdn.comfy.ua/89fc351a-22e7-41ee-8321-f8a9356ca351/https://cdn.comfy.ua/media/catalog/product/3/4/345_6.jpg/w_600",
+  OnePlus:
+    "https://scdn.comfy.ua/89fc351a-22e7-41ee-8321-f8a9356ca351/https://cdn.comfy.ua/media/catalog/product/5/0/5011102564_001.jpg/w_600",
+  Motorola:
+    "https://scdn.comfy.ua/89fc351a-22e7-41ee-8321-f8a9356ca351/https://cdn.comfy.ua/media/catalog/product/1/4/14141414141414_2.jpg/w_600",
+  Nokia:
+    "https://scdn.comfy.ua/89fc351a-22e7-41ee-8321-f8a9356ca351/https://cdn.comfy.ua/media/catalog/product/1/4/14141414141414_2.jpg/w_600",
+};
+
+function getRandomItem(arr) {
+  return arr[Math.floor(Math.random() * arr.length)];
+}
+
+function generatePhones(count = 50) {
+  const phones = [];
+
+  for (let i = 1; i <= count; i++) {
+    const brand = getRandomItem(brands);
+    phones.push({
+      fullname: `${brand} Model ${i}`,
+      brand,
+      release_year: getRandomItem(years),
+      color: getRandomItem(colors),
+      has_bluetooth: Math.random() > 0.1,
+      has_infrared: Math.random() > 0.7,
+      price: +(Math.random() * 1000 + 200).toFixed(2),
+      photo_url:
+        brandImages[brand] || "https://via.placeholder.com/150?text=Phone",
+    });
+  }
+
+  return phones;
+}
 
 async function seedData() {
+  const phones = generatePhones(50);
+
   try {
+    await pool.query("DELETE FROM phones");
+    console.log("🧹 Таблиця 'phones' очищена");
+
     for (let phone of phones) {
       await pool.query(
         `INSERT INTO phones 
@@ -63,9 +85,10 @@ async function seedData() {
         ]
       );
     }
-    console.log(" Дані успішно додано!");
+
+    console.log("📱 50 брендованих телефонів успішно додано!");
   } catch (err) {
-    console.error(" Помилка при додаванні даних:", err);
+    console.error("❌ Помилка при додаванні даних:", err);
   } finally {
     await pool.end();
   }

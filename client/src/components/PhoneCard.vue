@@ -1,18 +1,16 @@
 <template>
-  <div
-    class="card h-100 shadow-sm p-3 border-0"
-    style="background-color: #e3e4e6"
-  >
-    <img :src="phone.photo_url" class="card-img-top" :alt="phone.fullname" />
-    <div class="card-body">
-      <h5 class="card-title">{{ phone.fullname }}</h5>
-      <p class="card-text"></p>
-    </div>
-    <div
-      class="card-footer d-flex justify-content-between align-items-center border-0"
-      style="background-color: #e3e4e6"
-    >
-      <slot name="actions" />
+  <div class="card h-100 shadow-sm p-3 border-0 phone-card">
+    <img
+      :src="phone.photo_url"
+      class="card-img-top phone-image mb-2"
+      :alt="phone.fullname"
+    />
+    <div class="card-body d-flex flex-column">
+      <h5 class="card-title mb-2">{{ phone.fullname }}</h5>
+      <p><strong>Ціна:</strong> ${{ phone.price }}</p>
+      <div class="mt-auto">
+        <slot name="actions" />
+      </div>
     </div>
   </div>
 </template>
@@ -30,8 +28,12 @@ export default {
 </script>
 
 <style scoped>
+* {
+  background-color: white !important;
+}
 .card-img-top {
-  object-fit: cover;
+  object-fit: contain;
   height: auto;
+  max-height: 300px;
 }
 </style>

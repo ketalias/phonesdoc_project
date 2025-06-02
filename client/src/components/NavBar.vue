@@ -1,6 +1,6 @@
 <template>
   <nav
-    class="navbar navbar-expand-lg navbar-light bg-light p-3 position-fixed top-0 w-100"
+    class="navbar navbar-expand-lg navbar-light p-3 position-fixed top-0 w-100"
   >
     <div class="container-fluid">
       <router-link class="navbar-brand fw-bolder" to="/">PhoneDoc</router-link>
@@ -27,6 +27,11 @@
               >Каталог</router-link
             >
           </li>
+          <li>
+            <router-link class="nav-link fw-bold" to="/login"
+              >Авторизуватись</router-link
+            >
+          </li>
         </ul>
       </div>
     </div>
@@ -38,6 +43,7 @@
 <style scoped>
 .navbar {
   z-index: 1000;
+  background-color: white !important;
 }
 
 li {

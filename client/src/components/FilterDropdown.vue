@@ -1,13 +1,16 @@
 <template>
   <div class="filter-group">
     <button
-      class="btn btn-light w-100 fw-bold border-bottom border-0 align-items-center d-flex justify-content-between"
+      class="btn w-100 fw-bold border-bottom border-0 align-items-center d-flex justify-content-between"
       style="background-color: #f8f9fa"
       type="button"
       @click="toggleMenu"
     >
       <p>{{ title }}</p>
-      <span>{{ isOpen ? "−" : "+" }}</span>
+      <span>
+        <i v-if="isOpen" class="bi bi-chevron-up"></i>
+        <i v-else class="bi bi-chevron-down"></i>
+      </span>
     </button>
     <div
       v-if="isOpen"
@@ -111,17 +114,19 @@ export default {
 </script>
 
 <style scoped>
+button {
+  background-color: white !important;
+  border-radius: 0;
+}
 .filter-menu {
   border-radius: 0;
   border-bottom: 1px solid #ced4da;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   margin-top: 0;
   padding: 0.25rem;
-  background-color: #fff;
 }
 
 .btn-light {
-  border-bottom: 1px solid #ced4da;
   border-radius: 0;
 }
 

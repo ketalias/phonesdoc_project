@@ -67,6 +67,37 @@
         <phones-grid :phones="filteredPhones" />
       </div>
     </div>
+    <div class="pagination mt-4 d-flex justify-content-center">
+      <button
+        class="btn btn-outline-dark mx-1"
+        :disabled="currentPage === 1"
+        @click="changePage(currentPage - 1)"
+      >
+        <i class="bi bi-chevron-left"></i>
+      </button>
+
+      <button
+        v-for="page in totalPages"
+        :key="page"
+        @click="changePage(page)"
+        :class="[
+          'btn',
+          page === currentPage ? 'btn-dark' : 'btn-outline-dark',
+          'mx-1',
+        ]"
+      >
+        {{ page }}
+      </button>
+
+      <button
+        class="btn btn-outline-dark mx-1"
+        :disabled="currentPage === totalPages"
+        @click="changePage(currentPage + 1)"
+      >
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+
     <footer><footer-comp /></footer>
   </div>
 </template>
@@ -86,6 +117,9 @@ export default {
   },
   data() {
     return {
+      currentPage: 1,
+      totalPages: 1,
+      limit: 12,
       phones: [],
       searchText: "",
       selectedBrands: [],
@@ -191,10 +225,23 @@ export default {
   methods: {
     async fetchPhones() {
       try {
-        const response = await axios.get("http://localhost:3000/api/phones");
-        this.phones = response.data;
+        const response = await axios.get("http://localhost:3000/api/phones", {
+          params: {
+            page: this.currentPage,
+            limit: this.limit,
+          },
+        });
+
+        this.phones = response.data.data;
+        this.totalPages = response.data.totalPages;
       } catch (error) {
         console.error("Error fetching phones:", error);
+      }
+    },
+    changePage(newPage) {
+      if (newPage >= 1 && newPage <= this.totalPages) {
+        this.currentPage = newPage;
+        this.fetchPhones();
       }
     },
     submitFilters() {
@@ -215,6 +262,12 @@ export default {
 <style lang="scss" scoped>
 * {
   box-sizing: border-box;
+}
+
+.catalog-view,
+.filter,
+.wrapper {
+  background-color: white !important;
 }
 
 .wrapper {

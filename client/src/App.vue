@@ -24,4 +24,8 @@ export default {
   overflow-x: hidden;
   margin-top: 5rem;
 }
+
+// * {
+//   background-color: white !important;
+// }
 </style>

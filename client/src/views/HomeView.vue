@@ -64,9 +64,6 @@
                   Новий 15-дюймовий MacBook Air має більше місця для дисплея
                   Liquid Retina.
                 </p>
-                <button class="btn btn-outline-light mt-3">
-                  Перейти до каталогу
-                </button>
               </div>
             </div>
           </div>
@@ -275,7 +272,6 @@ h1 {
   }
 }
 
-// Responsive .display-1 for all viewports
 .display-1 {
   font-size: 7rem;
 

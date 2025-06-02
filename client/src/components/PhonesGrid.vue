@@ -1,8 +1,13 @@
 <template>
-  <div class="items col-md-6">
+  <div class="items col-12 col-md-9 col-lg-9">
     <div v-if="phones.length === 0" class="text-muted">Нічого не знайдено</div>
-    <div class="row row-cols-1 row-cols-md-3 g-4">
-      <div v-for="phone in phones" :key="phone.fullname" class="col">
+
+    <div class="row g-4">
+      <div
+        v-for="phone in phones"
+        :key="phone.fullname"
+        class="col-12 col-sm-6 col-md-4 col-lg-3"
+      >
         <phone-card :phone="phone">
           <template #actions>
             <router-link

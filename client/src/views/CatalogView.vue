@@ -253,7 +253,7 @@
 </template>
 
 <script>
-import axios from "axios";
+import API from "../api"; // заміни шлях, якщо api.js в іншій папці
 import FilterDropdown from "../components/FilterDropdown.vue";
 import PhonesGrid from "../components/PhonesGrid.vue";
 import FooterComp from "../components/FooterComp.vue";
@@ -378,9 +378,7 @@ export default {
       };
 
       try {
-        const res = await axios.get("http://localhost:3000/api/phones", {
-          params,
-        });
+        const res = await API.get("/api/phones", { params });
         this.phones = res.data.data;
         this.totalPages = res.data.totalPages;
         this.totalItems = res.data.totalItems;
@@ -391,7 +389,7 @@ export default {
     },
     async fetchAllPhones() {
       try {
-        const res = await axios.get("http://localhost:3000/api/phones", {
+        const res = await API.get("/api/phones", {
           params: { limit: 1000 },
         });
         this.allPhones = res.data.data;

@@ -108,7 +108,7 @@
 </template>
 
 <script>
-import axios from "axios";
+import API from "../api"; // шлях залежить від структури, можливо "../../api"
 import { Modal } from "bootstrap";
 
 export default {
@@ -151,9 +151,7 @@ export default {
   methods: {
     async loadPhones() {
       try {
-        const res = await axios.get(
-          "http://localhost:3000/api/phones?limit=150&page=1"
-        );
+        const res = await API.get("/api/phones?limit=150&page=1");
         this.phones = res.data.data;
       } catch (error) {
         console.error("Failed to load phones:", error);
@@ -173,12 +171,9 @@ export default {
     async save() {
       try {
         if (this.editId) {
-          await axios.put(
-            `http://localhost:3000/api/phones/${this.editId}`,
-            this.form
-          );
+          await API.put(`/api/phones/${this.editId}`, this.form);
         } else {
-          await axios.post(`http://localhost:3000/api/phones`, this.form);
+          await API.post(`/api/phones`, this.form);
         }
         this.hideModal();
         this.resetForm();
@@ -190,7 +185,7 @@ export default {
     async remove(id) {
       if (confirm("Delete this phone?")) {
         try {
-          await axios.delete(`http://localhost:3000/api/phones/${id}`);
+          await API.delete(`/api/phones/${id}`);
           await this.loadPhones();
         } catch (error) {
           console.error("Failed to delete phone:", error);

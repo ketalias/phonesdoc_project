@@ -123,7 +123,7 @@
 
 <script>
 import FooterComp from "../components/FooterComp.vue";
-import axios from "axios";
+import API from "../api"; // Шлях може змінюватися залежно від структури
 
 export default {
   components: { FooterComp },
@@ -145,9 +145,7 @@ export default {
   methods: {
     async fetchPhone() {
       try {
-        const response = await axios.get(
-          `http://localhost:3000/api/phones/${this.$route.params.id}`
-        );
+        const response = await API.get(`/api/phones/${this.$route.params.id}`);
         this.phone = response.data;
       } catch (error) {
         console.error("Помилка при завантаженні даних телефону:", error);

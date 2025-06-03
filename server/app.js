@@ -25,6 +25,10 @@ app.use(
 );
 
 app.use(express.json());
+app.get("/", (req, res) => {
+  res.send("Phones API is running!");
+});
+
 app.use("/api/phones", phoneRoutes);
 app.use("/api/users", usersRoutes);
 

@@ -6,15 +6,20 @@
       <div class="container">
         <div class="content row align-items-center">
           <div class="col-md-6 text-center text-md-start">
-            <p class="text-white-50">Welcome.Pro</p>
+            <p class="text-white-50">Welcome.Friend</p>
             <h1 class="display-1 fw-bold mb-1 text-wrap">
-              <span class="fw-light">Phone Catalog</span> Number One
+              <span class="fw-light">Phone Store</span> Number One
             </h1>
             <p class="lead mb-4 text-wrap">
-              PhoneDoc це веб додаток для керування телефонним бізнесом за
-              допомогою довідника, швидко та зручно.
+              Від смартфонів до навушників — у нас є все, що потрібно для
+              сучасного життя. Оформлюй замовлення швидко, зручно та безпечно.
             </p>
-            <button class="btn btn-outline-light btn-lg">Почати</button>
+            <router-link
+              to="/catalog"
+              class="btn btn-outline-light btn-lg px-5"
+            >
+              Почати
+            </router-link>
           </div>
           <div class="image-container col-md-6 position-relative">
             <img
@@ -42,10 +47,9 @@
               <div class="product-info">
                 <h2 class="h3">Apple</h2>
                 <p class="text">
-                  Готова база даних, що містить детальну інформацію про всі
-                  смартфони, випущені компанією Apple. Ця база охоплює технічні
-                  характеристики, дати випуску, особливості моделей, а також їх
-                  еволюцію від першого iPhone до найновіших пристроїв.
+                  Досліджуй повну лінійку смартфонів Apple — від iPhone SE до
+                  новітнього iPhone 16 Pro Max. Порівнюй характеристики, обирай
+                  і купуй.
                 </p>
               </div>
             </div>
@@ -64,7 +68,7 @@
               />
               <div class="product-info">
                 <h3 class="h4">Електронні годинники</h3>
-                <p>Скоро у мережі!</p>
+                <p>Скоро у продажу — слідкуй за оновленнями!</p>
               </div>
             </div>
           </div>
@@ -79,7 +83,7 @@
               />
               <div class="product-info">
                 <h3 class="h4">Навушники</h3>
-                <p>Скоро стане доступним для додавання!</p>
+                <p>Скоро у продажу — найкращий звук для твого ритму життя.</p>
               </div>
             </div>
           </div>
@@ -109,19 +113,20 @@
           />
         </div>
         <div class="col-md-6 mb-4 mb-md-0">
-          <h1 class="display-2 mb-3">Керуйте бізнесом разом з нами</h1>
+          <h1 class="display-2 mb-3">Оновлюй техніку з нами</h1>
           <p class="lead mb-4">
-            Долучайтесь до нашої мережі та користуйтесь платними планами для ще
-            кращої продуктивності
+            Обирай із сотень перевірених гаджетів: смартфони, аксесуари,
+            годинники. Вигідні ціни, швидка доставка, гарантія.
           </p>
-          <button class="btn btn-outline-light btn-lg">
-            Перейти в каталог!
-          </button>
+
+          <router-link to="/catalog" class="btn btn-outline-light btn-lg px-5">
+            Перейти до каталогу
+          </router-link>
         </div>
         <div class="col-md-3 d-flex justify-content-center">
           <img
             class="img-fluid"
-            style="max-width: 500px; object-fit: cover"
+            style="max-width: 500px; max-height: 40vh; object-fit: cover"
             src="../assets/photo2.png"
             alt="Phone Right"
           />

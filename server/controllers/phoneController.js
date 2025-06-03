@@ -7,6 +7,8 @@ exports.getPhones = async (req, res) => {
 
   const { search, brands, prices, years, colors, ports, bluetooth } = req.query;
 
+  console.log("📥 GET /api/phones query:", req.query);
+
   const values = [];
   const conditions = [];
 
@@ -80,18 +82,21 @@ exports.getPhones = async (req, res) => {
   const whereClause =
     conditions.length > 0 ? `WHERE ${conditions.join(" AND ")}` : "";
 
-  try {
-    const phonesResult = await pool.query(
-      `SELECT * FROM phones ${whereClause} ORDER BY id LIMIT $${
-        values.length + 1
-      } OFFSET $${values.length + 2}`,
-      [...values, limit, offset]
-    );
+  const phonesQuery = `SELECT * FROM phones ${whereClause} ORDER BY id LIMIT $${
+    values.length + 1
+  } OFFSET $${values.length + 2}`;
+  const countQuery = `SELECT COUNT(*) FROM phones ${whereClause}`;
 
-    const countResult = await pool.query(
-      `SELECT COUNT(*) FROM phones ${whereClause}`,
-      values
-    );
+  console.log("📄 Final SQL:", phonesQuery);
+  console.log("🔢 Values:", [...values, limit, offset]);
+
+  try {
+    const phonesResult = await pool.query(phonesQuery, [
+      ...values,
+      limit,
+      offset,
+    ]);
+    const countResult = await pool.query(countQuery, values);
 
     const total = parseInt(countResult.rows[0].count);
 
@@ -102,43 +107,28 @@ exports.getPhones = async (req, res) => {
       data: phonesResult.rows,
     });
   } catch (err) {
+    console.error("❌ Error in getPhones:", err);
     res.status(500).json({ error: err.message });
   }
 };
 
 exports.getPhone = async (req, res) => {
   const { id } = req.params;
+  console.log("📥 GET /api/phones/:id", id);
   try {
     const result = await pool.query("SELECT * FROM phones WHERE id = $1", [id]);
     if (result.rows.length === 0)
       return res.status(404).json({ message: "Not found" });
     res.json(result.rows[0]);
   } catch (err) {
+    console.error("❌ Error in getPhone:", err);
     res.status(500).json({ error: err.message });
   }
 };
 
 exports.createPhone = async (req, res) => {
-  const {
-    fullname,
-    brand,
-    release_year,
-    colors,
-    has_bluetooth,
-    has_infrared,
-    price,
-    old_price,
-    photo_url,
-    memory_size,
-    screen_size,
-    cpu,
-    battery_capacity,
-    description,
-    refresh_rate,
-    resolution,
-    screen_type,
-    number_of_cores,
-  } = req.body;
+  const data = req.body;
+  console.log("📥 POST /api/phones", data);
 
   try {
     const result = await pool.query(
@@ -150,54 +140,37 @@ exports.createPhone = async (req, res) => {
          $10, $11, $12, $13, $14, $15, $16, $17, $18)
        RETURNING *`,
       [
-        fullname,
-        brand,
-        release_year,
-        colors,
-        has_bluetooth,
-        has_infrared,
-        price,
-        old_price,
-        photo_url,
-        memory_size,
-        screen_size,
-        cpu,
-        battery_capacity,
-        description,
-        refresh_rate,
-        resolution,
-        screen_type,
-        number_of_cores,
+        data.fullname,
+        data.brand,
+        data.release_year,
+        data.colors,
+        data.has_bluetooth,
+        data.has_infrared,
+        data.price,
+        data.old_price,
+        data.photo_url,
+        data.memory_size,
+        data.screen_size,
+        data.cpu,
+        data.battery_capacity,
+        data.description,
+        data.refresh_rate,
+        data.resolution,
+        data.screen_type,
+        data.number_of_cores,
       ]
     );
     res.status(201).json(result.rows[0]);
   } catch (err) {
+    console.error("❌ Error in createPhone:", err);
     res.status(500).json({ error: err.message });
   }
 };
 
 exports.updatePhone = async (req, res) => {
   const { id } = req.params;
-  const {
-    fullname,
-    brand,
-    release_year,
-    colors,
-    has_bluetooth,
-    has_infrared,
-    price,
-    old_price,
-    photo_url,
-    memory_size,
-    screen_size,
-    cpu,
-    battery_capacity,
-    description,
-    refresh_rate,
-    resolution,
-    screen_type,
-    number_of_cores,
-  } = req.body;
+  const data = req.body;
+  console.log("📥 PUT /api/phones/:id", id, data);
 
   try {
     const result = await pool.query(
@@ -208,24 +181,24 @@ exports.updatePhone = async (req, res) => {
         refresh_rate=$15, resolution=$16, screen_type=$17, number_of_cores=$18
        WHERE id=$19 RETURNING *`,
       [
-        fullname,
-        brand,
-        release_year,
-        colors,
-        has_bluetooth,
-        has_infrared,
-        price,
-        old_price,
-        photo_url,
-        memory_size,
-        screen_size,
-        cpu,
-        battery_capacity,
-        description,
-        refresh_rate,
-        resolution,
-        screen_type,
-        number_of_cores,
+        data.fullname,
+        data.brand,
+        data.release_year,
+        data.colors,
+        data.has_bluetooth,
+        data.has_infrared,
+        data.price,
+        data.old_price,
+        data.photo_url,
+        data.memory_size,
+        data.screen_size,
+        data.cpu,
+        data.battery_capacity,
+        data.description,
+        data.refresh_rate,
+        data.resolution,
+        data.screen_type,
+        data.number_of_cores,
         id,
       ]
     );
@@ -235,12 +208,14 @@ exports.updatePhone = async (req, res) => {
 
     res.json(result.rows[0]);
   } catch (err) {
+    console.error("❌ Error in updatePhone:", err);
     res.status(500).json({ error: err.message });
   }
 };
 
 exports.deletePhone = async (req, res) => {
   const { id } = req.params;
+  console.log("🗑 DELETE /api/phones/:id", id);
   try {
     const result = await pool.query(
       "DELETE FROM phones WHERE id=$1 RETURNING *",
@@ -250,6 +225,7 @@ exports.deletePhone = async (req, res) => {
       return res.status(404).json({ message: "Not found" });
     res.json({ message: "Deleted successfully" });
   } catch (err) {
+    console.error("❌ Error in deletePhone:", err);
     res.status(500).json({ error: err.message });
   }
 };

@@ -3,7 +3,6 @@ const cors = require("cors");
 const express = require("express");
 const app = express();
 const phoneRoutes = require("./routes/phoneRoutes");
-const usersRoutes = require("./routes/usersRoutes");
 const authRoutes = require("./routes/authRoutes");
 
 const allowedOrigins = [
@@ -30,8 +29,6 @@ app.get("/", (req, res) => {
 });
 
 app.use("/api/phones", phoneRoutes);
-app.use("/api/users", usersRoutes);
-
 app.use("/api/auth", authRoutes);
 
 module.exports = app;

@@ -147,28 +147,6 @@ export default {
   components: {
     FooterComp,
   },
-  data() {
-    return {
-      phones: [],
-    };
-  },
-  mounted() {
-    fetch("http://localhost:3000/api/phones")
-      .then((res) => res.json())
-      .then((data) => (this.phones = data))
-      .catch((err) => console.error("Помилка:", err));
-  },
-  methods: {
-    remove(id) {
-      fetch(`http://localhost:3000/api/phones/${id}`, {
-        method: "DELETE",
-      })
-        .then(() => {
-          this.phones = this.phones.filter((p) => p.id !== id);
-        })
-        .catch((err) => console.error("Помилка видалення:", err));
-    },
-  },
 };
 </script>
 

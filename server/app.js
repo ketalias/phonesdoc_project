@@ -8,7 +8,7 @@ const authRoutes = require("./routes/authRoutes");
 
 app.use(
   cors({
-    origin: "http://localhost:8080",
+    origin: ["http://localhost:8080", "https://phones-ecomerce.netlify.app"],
   })
 );
 

@@ -1,5 +1,5 @@
 <template>
-  <div class="items col-12 col-md-9 col-lg-9">
+  <div class="items col-12">
     <div v-if="phones.length === 0" class="text-muted">Нічого не знайдено</div>
 
     <div class="row g-4">
@@ -8,16 +8,7 @@
         :key="phone.fullname"
         class="col-12 col-sm-6 col-md-4 col-lg-3"
       >
-        <phone-card :phone="phone">
-          <template #actions>
-            <router-link
-              :to="{ name: 'phoneinfo', params: { id: phone.id } }"
-              class="btn btn-dark btn-sm w-100 p-3"
-            >
-              Перейти
-            </router-link>
-          </template>
-        </phone-card>
+        <phone-card :phone="phone" />
       </div>
     </div>
   </div>

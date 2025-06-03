@@ -27,10 +27,8 @@
               >Каталог</router-link
             >
           </li>
-          <li>
-            <router-link class="nav-link fw-bold" to="/login"
-              >Авторизуватись</router-link
-            >
+          <li class="nav-item">
+            <router-link class="nav-link fw-bold" to="/cart">Кошик</router-link>
           </li>
         </ul>
       </div>

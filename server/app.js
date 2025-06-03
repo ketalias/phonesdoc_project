@@ -6,9 +6,21 @@ const phoneRoutes = require("./routes/phoneRoutes");
 const usersRoutes = require("./routes/usersRoutes");
 const authRoutes = require("./routes/authRoutes");
 
+const allowedOrigins = [
+  "http://localhost:8080",
+  "https://phones-ecomerce.netlify.app",
+];
+
 app.use(
   cors({
-    origin: ["http://localhost:8080", "https://phones-ecomerce.netlify.app"],
+    origin: function (origin, callback) {
+      if (!origin) return callback(null, true);
+      if (allowedOrigins.indexOf(origin) !== -1) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
   })
 );
 

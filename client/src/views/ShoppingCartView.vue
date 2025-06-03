@@ -1,10 +1,7 @@
 <template>
-  <div>
-    <div
-      class="container py-5 w-100 d-flex justify-content-between"
-      style="min-height: 60vh; display: flex; gap: 2rem"
-    >
-      <div v-if="cartItems.length > 0" class="items col-6">
+  <div class="shopping-cart-view">
+    <div class="container-fluid row py-5" style="min-height: 60vh">
+      <div v-if="cartItems.length > 0" class="items col-12 col-md-6">
         <h2 class="mb-4 text-start">Ваш кошик</h2>
         <div
           v-for="(item, index) in cartItems"
@@ -68,7 +65,7 @@
         </div>
       </div>
 
-      <div class="summary col-6">
+      <div class="summary col-12 col-md-6">
         <h2 class="mb-4 text-start">Загальна вартість</h2>
         <div class="discounts mb-3 text-start text-muted">
           <label for="promoCode">Код знижки / Промокод</label>
@@ -214,14 +211,14 @@ export default {
 </script>
 
 <style scoped>
+@media (max-width: 1400px) {
+  .items,
+  .summary {
+    width: 100%;
+  }
+}
+
 img {
   max-height: 100px;
-}
-.container {
-  display: flex;
-}
-.items,
-.summary {
-  flex: 1;
 }
 </style>

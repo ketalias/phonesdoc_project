@@ -5,7 +5,23 @@ exports.getPhones = async (req, res) => {
   const page = parseInt(req.query.page) || 1;
   const offset = (page - 1) * limit;
 
-  const { search, brands, prices, years, colors, ports, bluetooth } = req.query;
+  const {
+    search,
+    brands,
+    prices,
+    years,
+    colors,
+    ports,
+    bluetooth,
+    memory_sizes,
+    screen_sizes,
+    cpus,
+    battery_capacities,
+    refresh_rates,
+    resolutions,
+    screen_types,
+    number_of_cores,
+  } = req.query;
 
   console.log("📥 GET /api/phones query:", req.query);
 
@@ -77,6 +93,71 @@ exports.getPhones = async (req, res) => {
     const placeholders = btValues.map((_, i) => `$${values.length + i + 1}`);
     values.push(...btValues);
     conditions.push(`has_bluetooth IN (${placeholders.join(",")})`);
+  }
+
+  if (memory_sizes) {
+    const list = memory_sizes.split(",");
+    const placeholders = list.map((_, i) => `$${values.length + i + 1}`);
+    values.push(...list);
+    conditions.push(`memory_size::text IN (${placeholders.join(",")})`);
+  }
+
+  if (screen_sizes) {
+    const list = screen_sizes.split(",");
+    const placeholders = list.map((_, i) => `$${values.length + i + 1}`);
+    values.push(...list);
+    conditions.push(`screen_size::text IN (${placeholders.join(",")})`);
+  }
+
+  if (cpus) {
+    const list = cpus.split(",");
+    const placeholders = list.map((_, i) => `$${values.length + i + 1}`);
+    values.push(...list);
+    conditions.push(`cpu IN (${placeholders.join(",")})`);
+  }
+
+  if (battery_capacities) {
+    const batteryConditions = battery_capacities.split(",").map((range) => {
+      const [min, max] = range.split("-").map(Number);
+      if (!isNaN(min) && isFinite(max)) {
+        values.push(min, max);
+        return `(battery_capacity >= $${
+          values.length - 1
+        } AND battery_capacity <= $${values.length})`;
+      } else {
+        values.push(min);
+        return `(battery_capacity >= $${values.length})`;
+      }
+    });
+    conditions.push(`(${batteryConditions.join(" OR ")})`);
+  }
+
+  if (refresh_rates) {
+    const list = refresh_rates.split(",");
+    const placeholders = list.map((_, i) => `$${values.length + i + 1}`);
+    values.push(...list);
+    conditions.push(`refresh_rate::text IN (${placeholders.join(",")})`);
+  }
+
+  if (resolutions) {
+    const list = resolutions.split(",");
+    const placeholders = list.map((_, i) => `$${values.length + i + 1}`);
+    values.push(...list);
+    conditions.push(`resolution IN (${placeholders.join(",")})`);
+  }
+
+  if (screen_types) {
+    const list = screen_types.split(",");
+    const placeholders = list.map((_, i) => `$${values.length + i + 1}`);
+    values.push(...list);
+    conditions.push(`screen_type IN (${placeholders.join(",")})`);
+  }
+
+  if (number_of_cores) {
+    const list = number_of_cores.split(",");
+    const placeholders = list.map((_, i) => `$${values.length + i + 1}`);
+    values.push(...list);
+    conditions.push(`number_of_cores::text IN (${placeholders.join(",")})`);
   }
 
   const whereClause =

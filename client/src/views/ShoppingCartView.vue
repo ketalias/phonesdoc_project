@@ -228,10 +228,20 @@ export default {
 </script>
 
 <style scoped>
+.shopping-cart-view .container-fluid {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.shopping-cart-view .row {
+  margin-left: 0;
+  margin-right: 0;
+}
+
 @media (max-width: 1400px) {
   .items,
   .summary {
-    width: 100%;
+    width: 100% !important;
   }
 }
 </style>

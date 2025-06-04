@@ -1,8 +1,18 @@
 <template>
   <div class="items col-12">
-    <div v-if="phones.length === 0" class="text-muted">Нічого не знайдено</div>
+    <div v-if="loading" class="py-5 text-center text-muted">
+      <div class="spinner-border text-dark" role="status">
+        <span class="visually-hidden">Завантаження...</span>
+      </div>
+      <p class="mt-3">Завантаження телефонів...</p>
+    </div>
 
-    <div class="row g-4">
+    <div v-else-if="phones.length === 0" class="py-5 text-center text-muted">
+      <img src="../assets/nofind.jpg" alt="" style="height: 60vh" />
+      <h1>Нічого не знайдено</h1>
+    </div>
+
+    <div v-else class="row g-4">
       <div
         v-for="phone in phones"
         :key="phone.fullname"
@@ -27,12 +37,10 @@ export default {
       type: Array,
       required: true,
     },
+    loading: {
+      type: Boolean,
+      default: false,
+    },
   },
 };
 </script>
-
-<style scoped>
-.mb-3 {
-  margin-bottom: 1rem !important;
-}
-</style>

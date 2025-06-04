@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="">
+<html lang="uk">
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" href="<%= BASE_URL %>pixilogo.ico" />
     <link
       rel="stylesheet"
@@ -13,15 +13,31 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
     />
-    <title>Pixi Store | Найращий магазин по переду застарілих бумерів</title>
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Pixi Store - найкращий магазин для покупки смартфонів, годинників та навушників. Знайдіть ідеальний гаджет за вигідною ціною!" />
+    <meta name="keywords" content="Pixi Store, смартфони, годинники, навушники, гаджети, купити онлайн, електроніка" />
+    <meta name="author" content="Pixi Store Team" />
+    <meta name="robots" content="index, follow" />
+    <!-- Open Graph Meta Tags (for social media sharing) -->
+    <meta property="og:title" content="Pixi Store | Найкращий магазин гаджетів" />
+    <meta property="og:description" content="Досліджуйте широкий асортимент смартфонів, годинників та навушників у Pixi Store. Купуйте якісні гаджети за найкращими цінами!" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="<%= BASE_URL %>" />
+    <meta property="og:image" content="<%= BASE_URL %>/default.png" />
+    <meta property="og:site_name" content="Pixi Store" />
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Pixi Store | Найкращий магазин гаджетів" />
+    <meta name="twitter:description" content="Досліджуйте широкий асортимент смартфонів, годинників та навушників у Pixi Store. Купуйте якісні гаджети за найкращими цінами!" />
+    <meta name="twitter:image" content="<%= BASE_URL %>/default.png" />
+    <meta name="twitter:site" content="@PixiStore" />
+    <title>Pixi Store | Найкращий магазин по переду застарілих бумерів</title>
   </head>
   <body>
     <noscript>
-      <strong
-        >We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work
-        properly without JavaScript enabled. Please enable it to
-        continue.</strong
-      >
+      <strong>
+        Вибачте, але <%= htmlWebpackPlugin.options.title %> не працює належним чином без увімкненого JavaScript. Будь ласка, увімкніть його, щоб продовжити.
+      </strong>
     </noscript>
     <div id="app"></div>
     <!-- built files will be auto injected -->

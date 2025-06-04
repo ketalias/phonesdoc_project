@@ -41,12 +41,12 @@
               <img
                 src="https://my-apple.com.ua/image/catalog/products/iphone/iphone-16-pro-16-pro-max/desert-titanium-1.png"
                 alt="Apple iPhone"
-                class="img-fluid product-img col-6 mb-3 mb-md-0 me-md-4"
-                style="width: 25vw; height: auto"
+                class="img-fluid product-img col-12 col-md-6 mb-3 mb-md-0 me-md-4"
+                style="width: 80%; max-width: 400px; height: auto"
               />
               <div class="product-info">
-                <h2 class="h3">Apple</h2>
-                <p class="text">
+                <h2 class="h1 fw-bold">Apple</h2>
+                <p class="text fs-6">
                   Досліджуй повну лінійку смартфонів Apple — від iPhone SE до
                   новітнього iPhone 16 Pro Max. Порівнюй характеристики, обирай
                   і купуй.
@@ -64,11 +64,12 @@
               <img
                 src="https://cdsassets.apple.com/live/SZLF0YNV/images/sp/111853_apple-watch-se-2nd-gen.png"
                 alt="AppleWatch"
-                class="img-fluid col-6 product-img mb-3 mb-md-0 me-md-4"
+                class="img-fluid col-12 col-md-6 product-img mb-3 mb-md-0 me-md-4"
+                style="width: 50%; max-width: 400px; height: auto"
               />
               <div class="product-info">
-                <h3 class="h4">Електронні годинники</h3>
-                <p>Скоро у продажу — слідкуй за оновленнями!</p>
+                <h3 class="h2 fw-bold">Електронні годинники</h3>
+                <p class="fs-6">Скоро у продажу — слідкуй за оновленнями!</p>
               </div>
             </div>
           </div>
@@ -79,11 +80,14 @@
               <img
                 src="https://applehome.te.ua/wp-content/uploads/2021/01/airpods-max-select-spacegray-202011.png"
                 alt="AirPods Max"
-                class="img-fluid product-img mb-3 mb-md-0 me-md-4"
+                class="img-fluid product-img mb-3 mb-md-0 me-md-4 col-12 col-md-6"
+                style="width: 40%; max-width: 400px; height: auto"
               />
               <div class="product-info">
-                <h3 class="h4">Навушники</h3>
-                <p>Скоро у продажу — найкращий звук для твого ритму життя.</p>
+                <h3 class="h2 fw-bold">Навушники</h3>
+                <p class="fs-6">
+                  Скоро у продажу — найкращий звук для твого ритму життя.
+                </p>
               </div>
             </div>
           </div>

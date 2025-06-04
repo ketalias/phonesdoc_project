@@ -2,15 +2,17 @@
   <div>
     <div class="container">
       <div v-if="phone" class="mb-3 card border-0">
-        <div class="card-body row justify-content-around border-0">
-          <div class="photo col-4">
+        <div
+          class="card-body row flex-column flex-md-row justify-content-around border-0"
+        >
+          <div class="photo col-12 col-md-4 mb-3 mb-md-0">
             <img
               :src="phone.photo_url"
               :alt="phone.fullname"
-              class="card-img-top"
+              class="card-img-top w-100"
             />
           </div>
-          <div class="col-md-6 text-start fs-5 py-4">
+          <div class="col-12 col-md-6 text-start fs-5 py-4">
             <h5 class="card-title fs-1 fw-bolder">
               {{ phone.fullname }} {{ phone.release_year }}
             </h5>
@@ -34,7 +36,7 @@
                   backgroundColor: color,
                   border:
                     color === selectedColor
-                      ? '2px solid black'
+                      ? '4px solid black'
                       : '1px solid #ccc',
                   cursor: 'pointer',
                 }"
@@ -48,7 +50,7 @@
                 :key="option"
                 class="memory-card border p-3 rounded-3"
                 :class="{
-                  'border-dark': selectedMemory === option,
+                  'bg-dark text-white border-dark': selectedMemory === option,
                   'border-secondary': selectedMemory !== option,
                 }"
                 @click="selectedMemory = option"
@@ -58,7 +60,7 @@
               </p>
             </div>
 
-            <div class="characteristics d-flex gap-2 mt-3">
+            <div class="characteristics d-flex flex-column gap-2 mt-3">
               <p class="bg-dark text-white py-3 px-5 rounded-3">
                 {{ phone.screen_size }}"
               </p>
@@ -70,7 +72,7 @@
               </p>
             </div>
 
-            <div class="d-flex gap-3 mt-2">
+            <div class="d-flex flex-column gap-2 mt-2">
               <p class="card-bluetooth">
                 Bluetooth:
                 <i
@@ -91,7 +93,7 @@
 
             <p>{{ truncateDescription(phone.description) }}</p>
 
-            <div class="d-flex flex-column flex-md-row gap-3 mt-4">
+            <div class="d-flex flex-column gap-3 mt-4">
               <button
                 class="btn btn-dark btn-lg w-100"
                 :disabled="!selectedColor || !selectedMemory"

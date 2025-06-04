@@ -1,7 +1,11 @@
 <template>
   <div class="shopping-cart-view">
-    <div class="container-fluid row py-5" style="min-height: 60vh">
-      <div v-if="cartItems.length > 0" class="items col-12 col-md-6">
+    <div
+      v-if="cartItems.length > 0"
+      class="container-fluid row py-5"
+      style="min-height: 60vh"
+    >
+      <div class="items col-12 col-md-6">
         <h2 class="mb-4 text-start">Ваш кошик</h2>
         <div
           v-for="(item, index) in cartItems"
@@ -14,6 +18,7 @@
                 :src="item.photo"
                 :alt="item.name"
                 class="img-fluid rounded"
+                style="max-height: 100px; object-fit: cover"
               />
             </div>
             <div
@@ -104,6 +109,18 @@
           Оформити замовлення
         </button>
       </div>
+    </div>
+    <div class="py-5 text-center" style="min-height: 60vh" v-else>
+      <img
+        src="../assets/emptycart.jpg"
+        alt="Порожній кошик"
+        style="height: 40vh"
+        class="mb-4"
+      />
+      <h2 class="text-muted mb-3">Ваш кошик порожній</h2>
+      <router-link to="/catalog" class="btn btn-dark">
+        Перейти до каталогу
+      </router-link>
     </div>
     <footer-comp class="mt-5" />
   </div>
@@ -216,9 +233,5 @@ export default {
   .summary {
     width: 100%;
   }
-}
-
-img {
-  max-height: 100px;
 }
 </style>

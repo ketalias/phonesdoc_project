@@ -60,13 +60,13 @@
 
             <div class="characteristics d-flex gap-2 mt-3">
               <p class="bg-dark text-white py-3 px-5 rounded-3">
-                {{ phone.screen_size }}
+                {{ phone.screen_size }}"
               </p>
               <p class="bg-dark text-white py-3 px-5 rounded-3">
                 {{ phone.cpu }}
               </p>
               <p class="bg-dark text-white py-3 px-5 rounded-3">
-                {{ phone.battery_capacity }}
+                {{ phone.battery_capacity }}mAh
               </p>
             </div>
 
@@ -89,7 +89,7 @@
               </p>
             </div>
 
-            <p>{{ phone.description }}</p>
+            <p>{{ truncateDescription(phone.description) }}</p>
 
             <div class="d-flex flex-column flex-md-row gap-3 mt-4">
               <button
@@ -123,7 +123,7 @@
 
 <script>
 import FooterComp from "../components/FooterComp.vue";
-import API from "../api"; // Шлях може змінюватися залежно від структури
+import API from "../api";
 
 export default {
   components: { FooterComp },
@@ -143,6 +143,13 @@ export default {
     },
   },
   methods: {
+    truncateDescription(text) {
+      const maxLength = 100;
+      if (!text) return "";
+      return text.length > maxLength
+        ? text.substring(0, maxLength) + "..."
+        : text;
+    },
     async fetchPhone() {
       try {
         const response = await API.get(`/api/phones/${this.$route.params.id}`);

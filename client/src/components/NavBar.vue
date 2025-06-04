@@ -3,7 +3,13 @@
     class="navbar navbar-expand-lg navbar-light p-3 position-fixed top-0 w-100"
   >
     <div class="container-fluid">
-      <router-link class="navbar-brand fw-bolder" to="/">PhoneDoc</router-link>
+      <router-link
+        to="/"
+        class="navbar-brand fw-bolder d-flex align-items-center gap-0"
+      >
+        <span>PixiStore</span>
+        <img src="../assets/navlogo.jpg" alt="Logo" style="height: 2em" />
+      </router-link>
 
       <button
         class="navbar-toggler"

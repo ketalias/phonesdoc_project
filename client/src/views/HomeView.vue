@@ -10,7 +10,7 @@
             <h1 class="display-1 fw-bold mb-1 text-wrap">
               <span class="fw-light">Phone Store</span> Number One
             </h1>
-            <p class="lead mb-4 text-wrap">
+            <p class="lead mb-5 text-wrap">
               Від смартфонів до навушників — у нас є все, що потрібно для
               сучасного життя. Оформлюй замовлення швидко, зручно та безпечно.
             </p>
@@ -90,15 +90,7 @@
         </div>
       </div>
     </section>
-    <section
-      class="bg-dark text-white py-5 mt-5"
-      style="
-        background-image: url('assets/images/bg-hero.jpg');
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-      "
-    >
+    <section class="bg-dark text-white py-5 mt-5">
       <div
         class="d-flex flex-column flex-md-row align-items-center justify-content-between text-center"
       >

@@ -1,5 +1,7 @@
 <template>
   <div class="container mt-5 admin-panel text-center">
+    <img src="../assets/admin.jpg" alt="" style="height: 20vh" />
+
     <h1>Admin Panel</h1>
     <b-button variant="success" class="mb-3" @click="showAddModal"
       >Add Phone</b-button
@@ -108,7 +110,7 @@
 </template>
 
 <script>
-import API from "../api"; // шлях залежить від структури, можливо "../../api"
+import API from "../api";
 import { Modal } from "bootstrap";
 
 export default {

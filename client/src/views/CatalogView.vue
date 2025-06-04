@@ -44,7 +44,6 @@
             class="mt-2"
           />
 
-          <!-- NEW FILTERS -->
           <filter-dropdown
             title="Памʼять (ГБ)"
             :options="memorySizeOptions"
@@ -110,7 +109,7 @@
               <strong class="text-dark">{{ totalItems }}</strong>
             </h5>
           </div>
-          <phones-grid :phones="phones" />
+          <phones-grid :phones="phones" :loading="isLoading" />
         </div>
 
         <div class="mobile-filters-modal" v-if="showMobileFilters">
@@ -219,7 +218,10 @@
       </div>
     </div>
 
-    <div class="pagination mt-4 d-flex justify-content-center">
+    <div
+      v-if="phones.length > 0"
+      class="pagination mt-4 d-flex justify-content-center"
+    >
       <button
         class="btn btn-outline-dark mx-1"
         :disabled="currentPage === 1"
@@ -253,7 +255,7 @@
 </template>
 
 <script>
-import API from "../api"; // заміни шлях, якщо api.js в іншій папці
+import API from "../api";
 import FilterDropdown from "../components/FilterDropdown.vue";
 import PhonesGrid from "../components/PhonesGrid.vue";
 import FooterComp from "../components/FooterComp.vue";
@@ -268,6 +270,7 @@ export default {
   data() {
     return {
       showMobileFilters: false,
+      isLoading: true,
       currentPage: 1,
       totalPages: 1,
       totalItems: 0,
@@ -385,6 +388,8 @@ export default {
         this.currentPage = page;
       } catch (err) {
         console.error("Помилка при отриманні телефонів:", err);
+      } finally {
+        this.isLoading = false;
       }
     },
     async fetchAllPhones() {

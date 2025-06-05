@@ -23,7 +23,7 @@ exports.getPhones = async (req, res) => {
     number_of_cores,
   } = req.query;
 
-  console.log("📥 GET /api/phones query:", req.query);
+  console.log("GET /api/phones query:", req.query);
 
   const values = [];
   const conditions = [];

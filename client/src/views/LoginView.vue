@@ -21,6 +21,8 @@
 </template>
 
 <script>
+import API from "../api";
+
 export default {
   data() {
     return {
@@ -28,12 +30,22 @@ export default {
     };
   },
   methods: {
-    login() {
-      if (this.password === "admin123") {
-        localStorage.setItem("authToken", "123456");
-        this.$router.push({ name: "admin" });
-      } else {
-        alert("Невірний пароль");
+    async login() {
+      try {
+        const res = await API.post("/api/auth/login", {
+          password: this.password,
+        });
+        const data = res.data;
+
+        if (data.token) {
+          localStorage.setItem("authToken", data.token);
+          this.$router.push({ name: "admin" });
+        } else {
+          alert("Невірний пароль");
+        }
+      } catch (err) {
+        console.error("Помилка під час входу:", err);
+        alert(err.response?.data?.message || "Помилка під час входу");
       }
     },
   },

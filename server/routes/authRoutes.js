@@ -1,20 +1,22 @@
-const express = require("express");
-const jwt = require("jsonwebtoken");
+const express = require('express');
 const router = express.Router();
 
-router.post("/login", (req, res) => {
-  const { password } = req.body;
+const { login, register } = require('../controllers/authController');
+const authMiddleware = require('../middlewares/authMiddleware');
+const roleMiddleware = require('../middlewares/roleMiddleware');
 
-  if (!password) {
-    return res.status(400).json({ message: "Пароль не вказано" });
-  }
+router.post('/login', login);
 
-  if (password === process.env.ADMIN_PASSWORD) {
-    const token = jwt.sign({ role: "admin" }, process.env.JWT_SECRET, { expiresIn: "1h" });
-    return res.json({ token });
-  } else {
-    return res.status(401).json({ message: "Невірний пароль" });
-  }
+router.get('/me', authMiddleware, (req, res) => {
+  res.json({
+    id: req.user.id,
+    username: req.user.username,
+    role: req.user.role
+  });
+});
+
+router.get('/admin-only', authMiddleware, roleMiddleware(['admin']), (req, res) => {
+  res.json({ message: 'Ви адміністратор. Доступ дозволено.' });
 });
 
 module.exports = router;

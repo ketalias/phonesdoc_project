@@ -28,6 +28,7 @@ const routes = [
     component: () => import("../views/AdminView.vue"),
     meta: {
       requiresAuth: true,
+      requiresAdmin: true,
     },
   },
   {
@@ -48,16 +49,21 @@ const router = createRouter({
 });
 
 router.beforeEach((to, from, next) => {
-  if (to.meta.requiresAuth) {
-    const isAuthenticated = !!localStorage.getItem("authToken");
-    if (isAuthenticated) {
-      next();
-    } else {
-      next({ name: "login" });
+  const token = sessionStorage.getItem("token");
+  const role = sessionStorage.getItem("role");
+
+  if (to.matched.some((record) => record.meta.requiresAuth)) {
+    if (!token) {
+      return next("/login");
     }
-  } else {
-    next();
+    if (to.matched.some((record) => record.meta.requiresAdmin)) {
+      if (role !== "admin") {
+        alert("Доступ заборонено: потрібна роль адміністратора");
+        return next(false);
+      }
+    }
   }
+  next();
 });
 
 export default router;

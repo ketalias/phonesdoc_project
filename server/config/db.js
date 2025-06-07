@@ -10,3 +10,8 @@ const pool = new Pool({
 });
 
 module.exports = pool;
+
+pool
+  .connect()
+  .then(() => console.log("Підключено до бази даних PostgreSQL"))
+  .catch((err) => console.error("Помилка підключення до БД:", err));

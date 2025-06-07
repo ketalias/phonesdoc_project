@@ -1,4 +1,4 @@
-const pool = require("../models/db");
+const pool = require("../config/db");
 
 exports.getPhones = async (req, res) => {
   const limit = parseInt(req.query.limit) || 10;

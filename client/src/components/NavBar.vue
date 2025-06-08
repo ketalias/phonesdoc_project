@@ -36,15 +36,10 @@
           <li class="nav-item">
             <router-link class="nav-link fw-bold" to="/cart">Кошик</router-link>
           </li>
-          <li>
-            <router-link class="nav-link fw-bold" to="/login">Вхід</router-link>
+          <li v-if="!auth.isAuthenticated" class="nav-item">
+            <router-link class="nav-link fw-bold" to="/auth">Вхід</router-link>
           </li>
-          <li>
-            <router-link class="nav-link fw-bold" to="/registration"
-              >Реєстрація</router-link
-            >
-          </li>
-          <li v-if="isAuthenticated" class="nav-item">
+          <li v-else class="nav-item">
             <button
               class="btn btn-link nav-link fw-bold"
               @click="logout"
@@ -59,27 +54,19 @@
   </nav>
 </template>
 
-<script>
+<script setup>
+import { useAuthStore } from "@/stores/auth";
 import API from "@/api";
-export default {
-  data() {
-    return {
-      isAuthenticated: !!sessionStorage.getItem("token"),
-    };
-  },
-  methods: {
-    logout() {
-      sessionStorage.removeItem("token");
-      sessionStorage.removeItem("role");
-      delete API.defaults.headers.common["Authorization"];
-      this.isAuthenticated = false;
-      this.$router.push("/login");
-    },
-  },
-  created() {
-    this.isAuthenticated = !!sessionStorage.getItem("token");
-  },
-};
+import { useRouter } from "vue-router";
+
+const auth = useAuthStore();
+const router = useRouter();
+
+function logout() {
+  auth.clearAuth();
+  delete API.defaults.headers.common["Authorization"];
+  router.push("/auth");
+}
 </script>
 
 <style scoped>

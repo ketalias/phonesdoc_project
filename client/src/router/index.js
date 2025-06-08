@@ -18,14 +18,9 @@ const routes = [
     component: () => import("../views/PhoneInfoView.vue"),
   },
   {
-    path: "/login",
-    name: "login",
-    component: () => import("../views/LoginView.vue"),
-  },
-  {
-    path: "/registration",
-    name: "registration",
-    component: () => import("../views/RegistrationView.vue"),
+    path: "/auth",
+    name: "auth",
+    component: () => import("../views/AuthView.vue"),
   },
   {
     path: "/admin",
